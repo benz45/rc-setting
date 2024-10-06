@@ -7,12 +7,13 @@ class ConvertXMLBusiness {
   convertToGraphic(XmlElement? elem, ProfileConfig config, bool isActivated) {
     if (elem != null) {
       ScreenSizeModel size = getScreenSize(config);
+      convert(elem, FULL_SCREEN, config.screenMode);
       convert(elem, FULL_SCREEN_WIDTH, size.width);
       convert(elem, FULL_SCREEN_HEIGHT, size.height);
       convert(elem, WINDOW_SCREEN_HEIGHT, size.height);
       convert(elem, WINDOW_SCREEN_WIDTH, size.width);
-      convert(elem, SCREEN_HZ, config.screenFramerate);
       if (isActivated) {
+        convert(elem, SCREEN_HZ, config.screenFramerate);
         convert(elem, SIGHT_DISTANCE, config.sightDistance);
         convert(elem, CAR_COUNT_LEVEL, config.carCountLevel);
         convert(elem, CAR_TEX_LEVEL, config.carTexLevel);
