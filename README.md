@@ -1,4 +1,4 @@
-# gunter
+# RC Setting
 
 Service for Updating Game Settings in Raycity RCRB
 
@@ -26,10 +26,11 @@ auto bdw = bitsdojo_window_configure(BDW_CUSTOM_FRAME | BDW_HIDE_ON_STARTUP);
 ----------------------------------------------------------------------------------------------------------------------
 
 # Environment
-GOOGLE_SHEET=<you code>
-JWT_ACTIVATE_SECRET=<you code>
-ENCRYPT_SECRET=<you code>
-ENCRYPT_IV=<you code>
+GOOGLE_SHEET=Your code
+JWT_ACTIVATE_SECRET=Your code
+ENCRYPT_SECRET=Your code
+ENCRYPT_IV=Your code
 
 
+# Git Remote
 git remote add origin git@github.com:benz45/rc-setting.git
