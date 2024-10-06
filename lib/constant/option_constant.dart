@@ -1,4 +1,4 @@
-const String FULLSCREEN = 'fullscreen';
+const String FULL_SCREEN = 'fullscreen';
 const String FULL_SCREEN_WIDTH = 'fullScreenWidth';
 const String FULL_SCREEN_HEIGHT = 'fullScreenHeight';
 const String FULL_SCREEN_DEPTH = 'fullScreenDepth';

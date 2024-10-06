@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "rc_setting" "\0"
+            VALUE "CompanyName", "RC Setting" "\0"
+            VALUE "FileDescription", "RC Setting" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "rc_setting" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
+            VALUE "LegalCopyright", "(C) 2024 github:benz45 Developer. All rights reserved." "\0"
             VALUE "OriginalFilename", "rc_setting.exe" "\0"
-            VALUE "ProductName", "rc_setting" "\0"
+            VALUE "ProductName", "RC Setting" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
