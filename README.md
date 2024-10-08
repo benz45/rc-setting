@@ -82,5 +82,5 @@ GPL-3.0 license
    [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
    
    git remote add origin git@github.com:benz45/rc-setting.git
-   test-reset
+   test-reset 2
 
