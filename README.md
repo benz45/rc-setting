@@ -33,3 +33,5 @@ ENCRYPT_IV=<you code>
 
 
 git remote add origin git@github.com:benz45/rc-setting.git
+
+test-reset
