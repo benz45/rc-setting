@@ -1,66 +1,47 @@
-<!-- หน้าจอ	Window	Fullscreen						
+<!-- หน้าจอ	
+Window	Fullscreen						
 fullscreen	FALSE	TRUE		
-				
 fullScreenWidth	800							
 fullScreenHeight	600							
 fullScreenDepth	32							
 windowScreenWidth	800							
 windowScreenHeight	600							
 windowScreenDepth	32				
-
 screenHz	75	
-
 screenAdapter	0							
 dwsOn	FALSE							
-
 ระยะการมองเห็น	1000m	900m	800m	700m	600m	500m	400m	300m
 sightDistance	0	1	2	3	4	5	6	7
-
 ปริมาณรถ	สูงมาก	สูง	กลาง	ต่ำ	ต่ำมาก			
 carCountLevel	0	1	2	3	4	
-
 Texture รถ	สูง	ต่ำ						
 carTexLevel	0	1			
-
 รายละเอียด Effect	สูง	ปกติ	ต่ำ	ไม่มี				
 carEffectLevel	0	1	2	3	
-
 เงาสะท้อนของรถ	คุณภาพดี	ทั่วไป	ต่ำ	ไม่มี				
 envmapLevel	0	1	2	3		
-
 ภาพ 3 มิติของตึก	สูง	ต่ำ						
 fieldLevel	0	1			
-
 ข้อความปลีกย่อย	ทั่วไป	ต่ำ	ต่ำมาก					
 texDetailLevel	0	1	2		
-
 รายละเอียดของแสง	สูง	ปกติ	ต่ำ					
 lightTexDetailLevel	0	1	2	
-
 ภาพสะท้องของตึก	เปิด	ปิด						
 reflection	TRUE	FALSE		
-				
 Environment effect	เปิด	ปิด						
 sceneGlowOn	TRUE	FALSE	
-
 Booster effect	เปิด	ปิด						
 motionBlurOn	TRUE	FALSE		
-
 Antialiasing	ปิด	เปิด	x2	x4	x8			
 multiSampleType	0	1	2	3	4	
-
 โพลิกอนของรถ	สูง	ต่ำ						
 carLodLevel	0	1		
-
 ดูข้อมูลสัญลักษณ์	เปิด	ปิด						
 renderSignboard	TRUE	FALSE	
-					
 ภาพสะท้อน	เปิด	ปิด						
 waterReflection	TRUE	FALSE	
-
 ระเบิด	ปิด	ต่ำ	ปกติ					
 bloomLevel	0	1	2	
-
 แสงไฟหน้า	ปิด	เปิด	ข้อมูล					
 dynLight2	0	1	2					 -->
 
@@ -169,3 +150,20 @@ final List<BaseOpntionModel<int>> dynLight2List = [
   BaseOpntionModel(title: 'เปิด', value: 1),
   BaseOpntionModel(title: 'ข้อมูล', value: 2),
 ];
+
+<!-- Sound -->
+
+<!-- เสียงดนตรีประกอบ -->
+bgmOn="false"
+<!-- ระดับเสียงดนตรีประกอบ -->
+bgmVolume="0.00"
+
+<!-- เสียงประกอบ -->
+effectOn="true"
+<!-- ระดับเสียงประกอบ -->
+effectVolume="0.10" 
+
+<!-- เสียงเครื่องบนต์ -->
+engineOn="false"
+<!-- ระดับเสียงเครื่องบนต์ -->
+engineVolume="0.00"
