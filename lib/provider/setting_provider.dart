@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:rc_setting/config/option_config.dart';
+import 'package:rc_setting/config/option_graphic_config.dart';
+import 'package:rc_setting/config/option_sound_config.dart';
 import 'package:rc_setting/model/base_option_model.dart';
 import 'package:rc_setting/model/screen_size_model.dart';
 import 'package:rc_setting/model/setting_default_model.dart';
@@ -232,7 +233,8 @@ class SettingProvider with ChangeNotifier, DiagnosticableTreeMixin {
 
   void addScreenSizeModel(ScreenSizeModel? value) {
     if (value != null && value?.width != null && value?.height != null) {
-      if (!_screenSizeList.any((e) => e.width == value.width && e.height == value.height)) {
+      if (!_screenSizeList
+          .any((e) => e.width == value.width && e.height == value.height)) {
         _screenSizeList
             .add(ScreenSizeModel(width: value.width, height: value.height));
         _screenSizeList.sort((a, b) => b.width.compareTo(a.width));
@@ -434,6 +436,60 @@ class SettingProvider with ChangeNotifier, DiagnosticableTreeMixin {
     notifyListeners();
   }
 
+// -----------------------------------------------------------------------
+  List<BaseOpntionModel<int>> get getBgmVloumeList => volumeList;
+  late BaseOpntionModel<int> _bgmVloume = volumeList[5];
+  BaseOpntionModel<int> get getBgmVloume => _bgmVloume;
+
+  late bool _isBgmVloume = true;
+  bool get getIsBgmVloume => _isBgmVloume;
+
+  void setBgmVloume(BaseOpntionModel<int> value) {
+    _bgmVloume = value;
+    notifyListeners();
+  }
+
+  void setIsBgmOnVloume(bool value) {
+    _isBgmVloume = value;
+    notifyListeners();
+  }
+
+// -----------------------------------------------------------------------
+  List<BaseOpntionModel<int>> get getEffectVloumeList => volumeList;
+  late BaseOpntionModel<int> _effectVloume = volumeList[5];
+  BaseOpntionModel<int> get getEffectVloume => _effectVloume;
+
+  late bool _isEffectVloume = true;
+  bool get getIsEffectVloume => _isEffectVloume;
+
+  void setEffectVloume(BaseOpntionModel<int> value) {
+    _effectVloume = value;
+    notifyListeners();
+  }
+
+  void setIsEffectOnVloume(bool value) {
+    _isEffectVloume = value;
+    notifyListeners();
+  }
+
+// -----------------------------------------------------------------------
+
+  List<BaseOpntionModel<int>> get getEngineVloumeList => volumeList;
+  late BaseOpntionModel<int> _engineVloume = volumeList[5];
+  BaseOpntionModel<int> get getEngineVloume => _engineVloume;
+
+  late bool _isEngineVloume = true;
+  bool get getIsEngineVloume => _isEngineVloume;
+
+  void setEngineVloume(BaseOpntionModel<int> value) {
+    _engineVloume = value;
+    notifyListeners();
+  }
+
+  void setIsEngineOnVloume(bool value) {
+    _isEngineVloume = value;
+    notifyListeners();
+  }
   // -----------------------------------------------------------------------
 
   BaseOpntionModel<int> firstWhereInt(

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:rc_setting/business/encrypter_business.dart';
-import 'package:rc_setting/config/option_config.dart';
+import 'package:rc_setting/config/option_graphic_config.dart';
 import 'package:rc_setting/constant/directory_constant.dart';
 import 'package:rc_setting/model/setting_model.dart';
 import 'package:path_provider/path_provider.dart';

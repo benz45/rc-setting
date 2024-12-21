@@ -131,8 +131,8 @@ final List<BaseOpntionModel<int>> multiSampleTypeList = [
 
 // โพลิกอนของรถ
 final List<BaseOpntionModel<int>> carLodLevelList = [
-  BaseOpntionModel(title: 'ต่ำ', value: 1),
-  BaseOpntionModel(title: 'สูง', value: 0),
+  BaseOpntionModel(title: 'ต่ำ', value: 0),
+  BaseOpntionModel(title: 'สูง', value: 1),
 ];
 
 // ดูข้อมูลสัญลักษณ์
@@ -168,6 +168,7 @@ final ConfigModel defaultConfig = ConfigModel(
   profile1: profileConfigDefault,
   profile2: profileConfigDefault,
   profile3: profileConfigDefault,
+  sound: defaultSound
 );
 
 ProfileConfig profileConfigDefault = ProfileConfig(
@@ -208,7 +209,7 @@ SettingDefaultModel defaultUltra = SettingDefaultModel(
   sceneGlowOn: true,
   motionBlurOn: true,
   multiSampleType: 4,
-  carLodLevel: 0,
+  carLodLevel: 1,
   renderSignboard: true,
   waterReflection: true,
   bloomLevel: 2,
@@ -228,7 +229,7 @@ SettingDefaultModel defaultHeight = SettingDefaultModel(
   sceneGlowOn: true,
   motionBlurOn: true,
   multiSampleType: 3,
-  carLodLevel: 0,
+  carLodLevel: 1,
   renderSignboard: true,
   waterReflection: true,
   bloomLevel: 2,
@@ -248,7 +249,7 @@ SettingDefaultModel defaultMiddle = SettingDefaultModel(
   sceneGlowOn: true,
   motionBlurOn: true,
   multiSampleType: 1,
-  carLodLevel: 0,
+  carLodLevel: 1,
   renderSignboard: true,
   waterReflection: true,
   bloomLevel: 2,
@@ -268,9 +269,11 @@ SettingDefaultModel defaultLow = SettingDefaultModel(
   sceneGlowOn: false,
   motionBlurOn: false,
   multiSampleType: 0,
-  carLodLevel: 0,
+  carLodLevel: 1,
   renderSignboard: true,
   waterReflection: true,
   bloomLevel: 2,
   dynLight2: 1,
 );
+
+SoundConfig defaultSound = SoundConfig(bgmOn: true, effectOn: true, engineOn: true, bgmVolume: 5, effectVolume: 5, engineVolume: 5);

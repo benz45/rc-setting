@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rc_setting/config/option_config.dart';
+import 'package:rc_setting/config/option_graphic_config.dart';
 import 'package:rc_setting/provider/setting_provider.dart';
 import 'package:rc_setting/theme.dart';
 import 'package:provider/provider.dart';

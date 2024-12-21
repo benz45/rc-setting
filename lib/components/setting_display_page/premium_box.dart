@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rc_setting/components/custom_ignore_pointer.dart';
 import 'package:rc_setting/components/setting_display_page/premium_button.dart';
 import 'package:rc_setting/provider/menu_provider.dart';
 import 'package:provider/provider.dart';
@@ -45,13 +46,10 @@ class _PremiumBoxState extends State<PremiumBox> {
               ],
             ),
           ),
-          IgnorePointer(
-            ignoring: widget.isActivated == false,
-            child: Opacity(
-              opacity: widget.isActivated == false ? 0.5 : 1.0,
-              child: widget.child,
-            ),
-          ),
+          CustomerIgnorePointer(
+            isIgnore: widget.isActivated == false,
+            child: widget.child,
+          )
         ],
       ),
     );

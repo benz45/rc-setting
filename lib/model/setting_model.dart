@@ -11,12 +11,14 @@ class ConfigModel {
     ProfileConfig profile1;
     ProfileConfig profile2;
     ProfileConfig profile3;
+    SoundConfig sound;
 
     ConfigModel({
         required this.currentProfile,
         required this.profile1,
         required this.profile2,
         required this.profile3,
+        required this.sound,
     });
 
     factory ConfigModel.fromJson(Map<String, dynamic> json) => ConfigModel(
@@ -24,6 +26,7 @@ class ConfigModel {
         profile1: ProfileConfig.fromJson(json['profile1']),
         profile2: ProfileConfig.fromJson(json['profile2']),
         profile3: ProfileConfig.fromJson(json['profile3']),
+        sound: SoundConfig.fromJson(json['sound']),
     );
 
     Map<String, dynamic> toJson() => {
@@ -31,6 +34,7 @@ class ConfigModel {
         'profile1': profile1.toJson(),
         'profile2': profile2.toJson(),
         'profile3': profile3.toJson(),
+        'sound': sound.toJson(),
     };
 }
 
@@ -131,5 +135,43 @@ class ProfileConfig {
         'waterReflection': waterReflection,
         'bloomLevel': bloomLevel,
         'dynLight2': dynLight2,
+    };
+}
+
+
+class SoundConfig {
+    bool bgmOn;
+    bool effectOn;
+    bool engineOn;
+    int bgmVolume;
+    int effectVolume;
+    int engineVolume;
+    
+
+    SoundConfig({
+        required this.bgmOn,
+        required this.effectOn,
+        required this.engineOn,
+        required this.bgmVolume,
+        required this.effectVolume,
+        required this.engineVolume,
+    });
+
+    factory SoundConfig.fromJson(Map<String, dynamic> json) => SoundConfig(
+        bgmOn: json['bgmOn'],
+        effectOn: json['effectOn'],
+        engineOn: json['engineOn'],
+        bgmVolume: json['bgmVolume'],
+        effectVolume: json['effectVolume'],
+        engineVolume: json['engineVolume'],
+    );
+
+    Map<String, dynamic> toJson() => {
+        'bgmOn': bgmOn,
+        'effectOn': effectOn,
+        'engineOn': engineOn,
+        'bgmVolume': bgmVolume,
+        'effectVolume': effectVolume,
+        'engineVolume': engineVolume,
     };
 }
