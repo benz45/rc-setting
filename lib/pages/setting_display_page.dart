@@ -239,6 +239,47 @@ class _SettingDisplayPageState extends State<SettingDisplayPage> {
                                 child: Column(
                                   children: [
                                     SizedBox(
+                                      height: 42,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Text(
+                                            'โหมด',
+                                            style: TextStyle(fontSize: 12),
+                                          ),
+                                          Row(
+                                            children: [
+                                              CustomModeButton(
+                                                label: 'เริ่มต้น',
+                                                onSelected: () {},
+                                                selected: true,
+                                                useged: true,
+                                                icon:
+                                                    Icons.brightness_4_rounded,
+                                              ),
+                                              CustomModeButton(
+                                                label: 'กลางวัน',
+                                                onSelected: () {},
+                                                selected: false,
+                                                useged: false,
+                                                icon:
+                                                    Icons.brightness_5_rounded,
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 22),
+                                      child: const Divider(
+                                        height: 0.1,
+                                        color: Colors.white10,
+                                      ),
+                                    ),
+                                    SizedBox(
                                       height: 22,
                                       child: Row(
                                         mainAxisAlignment:
@@ -804,7 +845,6 @@ class CustomProfileButton extends StatefulWidget {
 class _CustomProfileButtonState extends State<CustomProfileButton> {
   @override
   Widget build(BuildContext context) {
-    widget.label;
     return Opacity(
       opacity: widget.selected ? 1.0 : 0.5,
       child: Padding(
@@ -835,7 +875,69 @@ class _CustomProfileButtonState extends State<CustomProfileButton> {
                   size: 18.0,
                 ),
               ),
-              Text(widget.label)
+              Text(
+                widget.label,
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomModeButton extends StatefulWidget {
+  final String label;
+  final bool selected;
+  final bool useged;
+  final Function() onSelected;
+  final IconData icon;
+  const CustomModeButton(
+      {super.key,
+      required this.label,
+      this.selected = false,
+      this.useged = false,
+      required this.onSelected,
+      required this.icon});
+
+  @override
+  State<CustomModeButton> createState() => _CustomModeButtonState();
+}
+
+class _CustomModeButtonState extends State<CustomModeButton> {
+  @override
+  Widget build(BuildContext context) {
+    return Opacity(
+      opacity: widget.selected ? 1.0 : 0.5,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: customDarkBackgroundColor,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                    width: 1,
+                    color: widget.selected
+                        ? customDarkAccentColor
+                        : customDarkSurfaceColor),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+              ),
+              fixedSize: const Size(114, 40)),
+          onPressed: widget.onSelected,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: Icon(
+                  widget.icon,
+                  color: widget.useged
+                      ? customDarkAccentColor
+                      : customDarkSurfaceColor,
+                  size: 16.0,
+                ),
+              ),
+              Text(widget.label, style: TextStyle(fontSize: 12))
             ],
           ),
         ),

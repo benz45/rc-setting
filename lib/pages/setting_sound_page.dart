@@ -135,206 +135,167 @@ class _SettingSoundPageState extends State<SettingSoundPage> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            PremiumBox(
-                              isActivated: activateProvider.isActivated,
-                              child: BoxDetail(
-                                light: true,
-                                child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 32,
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Row(
-                                            children: [
-                                              Text(
-                                                'เสียงดนตรีประกอบ',
-                                                style: TextStyle(fontSize: 12),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            width: 40,
-                                            child: FittedBox(
-                                              fit: BoxFit.fill,
-                                              child: Switch(
-                                                value: settingProvider
-                                                    .getIsBgmVloume,
-                                                activeColor: Colors.red,
-                                                onChanged: (bool value) {
-                                                  settingProvider
-                                                      .setIsBgmOnVloume(value);
-                                                },
-                                              ),
+                            BoxDetail(
+                              light: true,
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 32,
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Row(
+                                          children: [
+                                            Text(
+                                              'เสียงดนตรีประกอบ',
+                                              style: TextStyle(fontSize: 12),
                                             ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    CustomerIgnorePointer(
-                                      isIgnore: settingProvider.getIsBgmVloume,
-                                      child: CustomSliderSound(
-                                        selectedValue:
-                                            settingProvider.getBgmVloume,
-                                        options:
-                                            settingProvider.getBgmVloumeList,
-                                        onChanged: (value) {
-                                          settingProvider.setBgmVloume(value);
-                                        },
-                                      ),
-                                    ),
-                                    const CustomDivider(),
-                                    SizedBox(
-                                      height: 32,
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Row(
-                                            children: [
-                                              Text(
-                                                'เสียงประกอบ',
-                                                style: TextStyle(fontSize: 12),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            width: 40,
-                                            child: FittedBox(
-                                              fit: BoxFit.fill,
-                                              child: Switch(
-                                                value: settingProvider
-                                                    .getIsEffectVloume,
-                                                activeColor: Colors.red,
-                                                onChanged: (bool value) {
-                                                  settingProvider
-                                                      .setIsEffectOnVloume(
-                                                          value);
-                                                },
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    CustomerIgnorePointer(
-                                      isIgnore:
-                                          settingProvider.getIsEffectVloume,
-                                      child: CustomSliderSound(
-                                        selectedValue:
-                                            settingProvider.getEffectVloume,
-                                        options:
-                                            settingProvider.getEffectVloumeList,
-                                        onChanged: (value) {
-                                          settingProvider
-                                              .setEffectVloume(value);
-                                        },
-                                      ),
-                                    ),
-                                    const CustomDivider(),
-                                    SizedBox(
-                                      height: 32,
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Row(
-                                            children: [
-                                              Text(
-                                                'เสียงเครื่องบนต์',
-                                                style: TextStyle(fontSize: 12),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            width: 40,
-                                            child: FittedBox(
-                                              fit: BoxFit.fill,
-                                              child: Switch(
-                                                value: settingProvider
-                                                    .getIsEngineVloume,
-                                                activeColor: Colors.red,
-                                                onChanged: (bool value) {
-                                                  settingProvider
-                                                      .setIsEngineOnVloume(
-                                                          value);
-                                                },
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    CustomerIgnorePointer(
-                                      isIgnore:
-                                          settingProvider.getIsEngineVloume,
-                                      child: CustomSliderSound(
-                                        selectedValue:
-                                            settingProvider.getEngineVloume,
-                                        options:
-                                            settingProvider.getEngineVloumeList,
-                                        onChanged: (value) {
-                                          settingProvider
-                                              .setEngineVloume(value);
-                                        },
-                                      ),
-                                    ),
-                                    const CustomDivider(),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 12),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  customDarkBackgroundColor,
-                                              shape:
-                                                  const RoundedRectangleBorder(
-                                                side: BorderSide(
-                                                    width: 1,
-                                                    color:
-                                                        customDarkSurfaceColor),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(6)),
-                                              ),
-                                            ),
-                                            onPressed: () => {},
-                                            child: const Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  'Reset',
-                                                  style:
-                                                      TextStyle(fontSize: 12),
-                                                )
-                                              ],
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 40,
+                                          child: FittedBox(
+                                            fit: BoxFit.fill,
+                                            child: Switch(
+                                              value: settingProvider
+                                                  .getIsBgmVloume,
+                                              activeColor: Colors.red,
+                                              onChanged: (bool value) {
+                                                settingProvider
+                                                    .setIsBgmOnVloume(value);
+                                              },
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        )
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  CustomerIgnorePointer(
+                                    isBlock: !settingProvider.getIsBgmVloume,
+                                    child: CustomSliderSound(
+                                      selectedValue:
+                                          settingProvider.getBgmVloume,
+                                      options:
+                                          settingProvider.getBgmVloumeList,
+                                      onChanged: (value) {
+                                        settingProvider.setBgmVloume(value);
+                                      },
+                                    ),
+                                  ),
+                                  const CustomDivider(),
+                                  SizedBox(
+                                    height: 32,
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Row(
+                                          children: [
+                                            Text(
+                                              'เสียงประกอบ',
+                                              style: TextStyle(fontSize: 12),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 40,
+                                          child: FittedBox(
+                                            fit: BoxFit.fill,
+                                            child: Switch(
+                                              value: settingProvider
+                                                  .getIsEffectVloume,
+                                              activeColor: Colors.red,
+                                              onChanged: (bool value) {
+                                                settingProvider
+                                                    .setIsEffectOnVloume(
+                                                        value);
+                                              },
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  CustomerIgnorePointer(
+                                    isBlock:
+                                        !settingProvider.getIsEffectVloume,
+                                    child: CustomSliderSound(
+                                      selectedValue:
+                                          settingProvider.getEffectVloume,
+                                      options:
+                                          settingProvider.getEffectVloumeList,
+                                      onChanged: (value) {
+                                        settingProvider
+                                            .setEffectVloume(value);
+                                      },
+                                    ),
+                                  ),
+                                  const CustomDivider(),
+                                  SizedBox(
+                                    height: 32,
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Row(
+                                          children: [
+                                            Text(
+                                              'เสียงเครื่องบนต์',
+                                              style: TextStyle(fontSize: 12),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 40,
+                                          child: FittedBox(
+                                            fit: BoxFit.fill,
+                                            child: Switch(
+                                              value: settingProvider
+                                                  .getIsEngineVloume,
+                                              activeColor: Colors.red,
+                                              onChanged: (bool value) {
+                                                settingProvider
+                                                    .setIsEngineOnVloume(
+                                                        value);
+                                              },
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  CustomerIgnorePointer(
+                                    isBlock:
+                                        !settingProvider.getIsEngineVloume,
+                                    child: CustomSliderSound(
+                                      selectedValue:
+                                          settingProvider.getEngineVloume,
+                                      options:
+                                          settingProvider.getEngineVloumeList,
+                                      onChanged: (value) {
+                                        settingProvider
+                                            .setEngineVloume(value);
+                                      },
+                                    ),
+                                  ),
+                                  
+                                ],
                               ),
                             )
                           ],

@@ -5,6 +5,7 @@ import 'package:filepicker_windows/filepicker_windows.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:intl/intl.dart';
 import 'package:rc_setting/business/encrypter_business.dart';
 import 'package:rc_setting/business/page_business.dart';
 import 'package:rc_setting/components/box_detail.dart';
@@ -17,6 +18,8 @@ import 'package:rc_setting/service/google_sheet_service.dart';
 import 'package:rc_setting/theme.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:rc_setting/util/date_util.dart';
+import 'package:rc_setting/util/validate_util.dart';
 
 class SettingGeneralPage extends StatefulWidget {
   const SettingGeneralPage({super.key});
@@ -106,13 +109,25 @@ class _SettingGeneralPageState extends State<SettingGeneralPage> {
         final jwt = JWT.verify(
             token, SecretKey('${dotenv.env['JWT_ACTIVATE_SECRET']}'));
         final localToken = jwt.payload['token'] as String;
-        final localUpdatedAt = jwt.payload['updatedAt'] as String;
-        final localUpdatedBy = jwt.payload['updatedBy'] as String;
+        final localUserDomain = jwt.payload['userDomain'] as String;
+        final localExpiryDate = jwt.payload['expiryDate'] as String?;
         AccessTokenModel? tokenObj =
             await _googleSheetService.fetchAccessTokenByToken(localToken);
         if (tokenObj != null) {
-          if (localUpdatedAt != tokenObj.updatedAt ||
-              localUpdatedBy != tokenObj.updatedBy) {
+          if (localUserDomain != tokenObj.userDomain) {
+            _activateProvider.removeActivated();
+            await activateFile.delete();
+          } else if (localExpiryDate != tokenObj.expiryDate) {
+            if (tokenObj.expiryDate != null) {
+              DateTime? date =
+                  DateFormat('dd-MM-yyyy').parse(tokenObj.expiryDate!);
+              bool isExpired = ExpiryChecker.isExpired(date);
+              if (isExpired) {
+                _activateProvider.removeActivated();
+                await activateFile.delete();
+                return;
+              }
+            }
             final jwt = JWT(tokenObj);
             final newToken =
                 jwt.sign(SecretKey('${dotenv.env['JWT_ACTIVATE_SECRET']}'));
@@ -122,14 +137,16 @@ class _SettingGeneralPageState extends State<SettingGeneralPage> {
                   _encrypterBusiness.encrypt(newToken);
               await file.writeAsString(newTokenEncrypted);
             }
+            _activateProvider.setActivated(tokenObj);
           }
-          _activateProvider.setActivated(tokenObj);
         }
       } on JWTExpiredException {
         print('jwt expired');
       } on JWTException catch (ex) {
         print(ex.message);
       }
+    } else {
+      _activateProvider.removeActivated();
     }
   }
 
@@ -159,6 +176,8 @@ class _SettingGeneralPageState extends State<SettingGeneralPage> {
       var message = e.toString();
       if (message.contains('not found')) {
         _snackBarAlert.snackBarAlertError('ไม่พบรหัสโค้ดนี้');
+      } else if (message.contains('expired')) {
+        _snackBarAlert.snackBarAlertError('รหัสโค้ดนี้หมดอายุแล้ว');
       } else {
         _snackBarAlert.snackBarAlertError(message);
       }
@@ -205,6 +224,34 @@ class _SettingGeneralPageState extends State<SettingGeneralPage> {
     if (searchTokenState.isNotEmpty) {
       postAccessTokenByToken(searchTokenState);
     }
+  }
+
+  renderToken(String? token) {
+    String result = '';
+    if (isNullOrEmpty(token)) {
+      result = '-';
+    } else if (isViewToken) {
+      result = token.toString();
+    } else {
+      result = '**************${token?.substring(14)}';
+    }
+    return Text(
+      result,
+      style: const TextStyle(fontSize: 12, height: 2, color: Colors.white),
+    );
+  }
+
+  renderTokenExpiryDate(int? expiryDate) {
+    String result = '';
+    if (isNullOrEmpty(expiryDate)) {
+      result = '';
+    } else {
+      result = ' (Expires in $expiryDate days)';
+    }
+    return Text(
+      result,
+      style: const TextStyle(fontSize: 12, height: 2, color: customDarkGold),
+    );
   }
 
   renderTextFieldAccessToken() {
@@ -364,7 +411,7 @@ class _SettingGeneralPageState extends State<SettingGeneralPage> {
             Container(
               alignment: Alignment.topLeft,
               padding: const EdgeInsets.only(bottom: 12),
-              child: const Text('ทั่วไป'),
+              child: const Text('หน้าหลัก'),
             ),
             Column(
               children: [
@@ -459,18 +506,21 @@ class _SettingGeneralPageState extends State<SettingGeneralPage> {
                                                             snapshot) {
                                                           return Row(
                                                             children: [
-                                                              Text(
-                                                                isViewToken
-                                                                    ? snapshot
-                                                                        .data
-                                                                        .toString()
-                                                                    : '**************${snapshot.data?.substring(14)}',
-                                                                style: const TextStyle(
-                                                                    fontSize:
-                                                                        12,
-                                                                    height: 2,
-                                                                    color: Colors
-                                                                        .white),
+                                                              Row(
+                                                                children: [
+                                                                  renderToken(
+                                                                      snapshot
+                                                                          .data),
+                                                                  FutureBuilder(
+                                                                      future: activateProvider
+                                                                          .getExpiryDate(),
+                                                                      builder: (BuildContext
+                                                                              context,
+                                                                          sn) {
+                                                                        return renderTokenExpiryDate(
+                                                                            sn.data);
+                                                                      }),
+                                                                ],
                                                               ),
                                                               isViewToken
                                                                   ? Padding(

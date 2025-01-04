@@ -1,31 +1,37 @@
 import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
 import 'package:rc_setting/model/access_token_model.dart';
+import 'package:rc_setting/util/date_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ActivateProvider with ChangeNotifier, DiagnosticableTreeMixin {
   bool _isActivated = false;
   String? _username;
-  late AccessTokenModel? _token;
+  AccessTokenModel? _token;
+  String? _expiryDate;
 
   final String _cacheIsActivatedKey = '_isActivated';
   final String _cacheUsernameKey = '_username';
   final String _cacheTokenKey = '_token';
+  final String _cacheExpiryDateKey = '_expiryDate';
 
-  Future<void> setIsActivate(String key, dynamic value) async {
+  Future<void> setCacheBool(String key, dynamic value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(key, value);
+    if (value == null) {
+      prefs.remove(key);
+    } else {
+      prefs.setBool(key, value);
+    }
     notifyListeners();
   }
 
-  Future<void> setUsername(String key, dynamic value) async {
+  Future<void> setCacheString(String key, dynamic value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(key, value);
-    notifyListeners();
-  }
-
-  Future<void> setToken(String key, dynamic value) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(key, value);
+    if (value == null) {
+      prefs.remove(key);
+    } else {
+      prefs.setString(key, value);
+    }
     notifyListeners();
   }
 
@@ -33,7 +39,7 @@ class ActivateProvider with ChangeNotifier, DiagnosticableTreeMixin {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool(key);
   }
-  
+
   Future<String?> getCahceUsername() async {
     final prefs = await SharedPreferences.getInstance();
     final res = prefs.getString(_cacheUsernameKey);
@@ -46,11 +52,20 @@ class ActivateProvider with ChangeNotifier, DiagnosticableTreeMixin {
     return res;
   }
 
+  Future<int?> getExpiryDate() async {
+    final prefs = await SharedPreferences.getInstance();
+    final res = prefs.getString(_cacheExpiryDateKey);
+    if (res == null) return null;
+    DateTime? date = DateFormat('dd-MM-yyyy').parse(res);
+    return ExpiryChecker.daysUntilExpiry(date);
+  }
+
   void removeCahce() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove(_cacheUsernameKey);
     prefs.remove(_cacheIsActivatedKey);
     prefs.remove(_cacheTokenKey);
+    prefs.remove(_cacheExpiryDateKey);
   }
 
   bool get isActivated {
@@ -64,9 +79,10 @@ class ActivateProvider with ChangeNotifier, DiagnosticableTreeMixin {
     _token = value;
     _isActivated = value.used;
     _username = value.username!;
-    setIsActivate(_cacheIsActivatedKey, _isActivated);
-    setUsername(_cacheUsernameKey, _username);
-    setToken(_cacheTokenKey, _token?.token);
+    setCacheBool(_cacheIsActivatedKey, _isActivated);
+    setCacheString(_cacheUsernameKey, _username);
+    setCacheString(_cacheTokenKey, _token?.token);
+    setCacheString(_cacheExpiryDateKey, _token?.expiryDate);
     notifyListeners();
   }
 
@@ -74,6 +90,7 @@ class ActivateProvider with ChangeNotifier, DiagnosticableTreeMixin {
     _token = null;
     _isActivated = false;
     _username = null;
+    _expiryDate = null;
     removeCahce();
     notifyListeners();
   }

@@ -47,7 +47,7 @@ class _PremiumBoxState extends State<PremiumBox> {
             ),
           ),
           CustomerIgnorePointer(
-            isIgnore: widget.isActivated == false,
+            isBlock: widget.isActivated == false,
             child: widget.child,
           )
         ],

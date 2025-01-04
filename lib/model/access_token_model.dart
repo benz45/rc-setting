@@ -12,6 +12,7 @@ class AccessTokenModel {
     String? createdAt;
     String? updatedAt;
     String? updatedBy;
+    String? expiryDate;
 
     AccessTokenModel({
         required this.token,
@@ -21,6 +22,7 @@ class AccessTokenModel {
         this.createdAt,
         this.updatedAt,
         this.updatedBy,
+        this.expiryDate,
     });
 
     factory AccessTokenModel.fromJson(Map<String, dynamic> json) => AccessTokenModel(
@@ -31,6 +33,7 @@ class AccessTokenModel {
         createdAt: json['createdAt'],
         updatedAt: json['updatedAt'],
         updatedBy: json['updatedBy'],
+        expiryDate: json['expiryDate'],
     );
 
     Map<String, dynamic> toJson() => {
@@ -41,5 +44,6 @@ class AccessTokenModel {
         'createdAt': createdAt,
         'updatedAt': updatedAt,
         'updatedBy': updatedBy,
+        'expiryDate': expiryDate,
     };
 }
